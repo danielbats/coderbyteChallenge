@@ -21,3 +21,13 @@ import '@testing-library/cypress/add-commands';
 Cypress.Commands.add("goToWebsite", () => {
 	cy.visit(Cypress.env('baseUrl'))
 })
+
+Cypress.Commands.add("getAddress", (path) => {
+	cy.request({
+		method: 'GET',
+		url: Cypress.env('apiFootballOrgUrl')+path,
+        failOnStatusCode: false
+	}).should((response) => {
+		return response.body;
+	});
+})
